@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <body class='{{= $block["class"] ?? "" }}'>
+      <head>{% view "/layout/head" %}</head>
+        <div id="full-wrapper">
+            <div id="body-wrapper">
+                <header id="wrapper-header" class="columns">
+                    <div class="column is-11">
+                        {% section "header" %}{% endsection %}
+                    </div>
+                    <div class="column">
+                        {# section "menu-toggle" %}
+                            <label for="menu-toggle" class="menu-toggle"><i class="far fa-bars"></i></label>
+                        {% endsection #}
+                    </div>
+                </header>
+
+                <section id="wrapper-subheader" class="columns">
+                    <div class="column is-narrow">{% section "subheader" %}{% endsection %}</div>
+                    <div class="column">
+                        {% section "breadcrumb" %}
+                            {# view "/layout/section/breadcrumb" #}
+                        {% endsection %}
+                    </div>
+                </section>
+
+                <div id="wrapper-content">
+                    {% section "content" %}{% endsection %}
+                </div>
+
+                <footer id="wrapper-footer">
+                    <div class="columns">
+                        <div class="column">
+                        {% section "footer-left" %}
+                            <a class="button is-small is-info" href="{% url %}"><i class="fas fa-caret-circle-left"></i>Annuler la migration</a>
+                        {% endsection %}
+                        </div>
+
+                        <div class="column has-text-right is-narrow">
+                        {% section "footer-right" %}{% endsection %}
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        {% section "javascript-body" %}{% endsection %}
+    </body>
+</html>

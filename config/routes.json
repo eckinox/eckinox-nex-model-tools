@@ -1,0 +1,15 @@
+{
+    "{Nex.router}" : {
+        "routes" : {
+            "nex" : {
+                "autoload" : true,
+                "{method.any}" : {
+                    "/!/migrate" : {
+                        "obj" : "\\Eckinox\\Nex_model_tools\\Controller\\Migration->migrate",
+                        "priority" : 10
+                    }
+                }
+            }
+        }
+    }
+}

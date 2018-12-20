@@ -1,0 +1,8 @@
+{
+    "{nex_model_tools.converter}" : {
+        "format" : {
+            "date": "Y-m-d",
+            "datetime": "Y-m-d H:i:s"
+        }
+    }
+}

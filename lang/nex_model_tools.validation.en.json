@@ -1,0 +1,21 @@
+{
+    "success" : {
+        "create" : "Saving done with success !",
+        "edit" : "Saving done with success !"
+    },
+
+    "errors" : {
+        "alphabetic" : {
+            "invalid" : "Field « <b>{$field.name}</b> » contains invalid caracters. Letters only are accepted into this input."
+        },
+
+        "email" : {
+            "invalid" : "Field « <b>{$field.name}</b> » as an invalid email pattern."
+        },
+
+        "password" : {
+            "mismatch" : "Field « <b>{$field.name}</b> » is different from confirm input. Please try again later.",
+            "invalid" : "Data from fields « <b>{$field.name}</b> » seems invalid. Make sure to have at least 5 caracters entered in it."
+        }
+    }
+}

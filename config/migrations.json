@@ -1,0 +1,121 @@
+{
+    "nex_model_tools" : {
+        "table" : {
+            "engine" : "MyISAM",
+            "charset" : "utf8mb4",
+            "collate" : "utf8mb4_general_ci"
+        },
+
+        "definition" : {
+            "null" : false
+        },
+
+        "fields" : {
+            "mysql" : {
+                "tiny int" : {
+                    "type" : "tinyint"
+                },
+
+                "small int" : {
+                    "type" : "smallint"
+                },
+
+                "medium int" : {
+                    "type" : "mediumint"
+                },
+
+                "big int" : {
+                    "type" : "bigint"
+                },
+
+                "tiny text" : {
+                    "type" : "tinytext"
+                },
+
+                "medium text" : {
+                    "type" : "mediumtext"
+                },
+
+                "long text" : {
+                    "type" : "longtext"
+                },
+
+                "tiny blob" : {
+                    "type" : "tinyblob"
+                },
+
+                "medium blob" : {
+                    "type" : "mediumblob"
+                },
+
+                "long blob" : {
+                    "type" : "longblob"
+                }
+            },
+
+            "custom" : {
+                "id" : {
+                    "type" : "int",
+                    "null" : false,
+                    "attr" : [ "auto_increment", "primary_key", "unsigned" ]
+                },
+
+                "bool" : {
+                    "type" : "tinyint",
+                    "null" : false,
+                    "default" : 0,
+                    "size" : 1
+                },
+
+                "foreign key" : {
+                    "type" : "int",
+                    "null" : true,
+                    "attr" : [ "unsigned" ]
+                },
+
+                "string" : {
+                    "type" : "varchar",
+                    "size" : 255
+                },
+
+                "small currency" : {
+                    "type" : "decimal",
+                    "size" : "5,2",
+                    "default" : "0.00"
+                },
+
+                "currency" : {
+                    "type" : "decimal",
+                    "size" : "12,2",
+                    "default" : "0.00"
+                },
+
+                "big currency" : {
+                    "type" : "decimal",
+                    "size" : "19,2",
+                    "default" : "0.00"
+                },
+
+                "created at" : {
+                    "type" : "timestamp",
+                    "default" : "CURRENT_TIMESTAMP"
+                },
+
+                "updated at" : {
+                    "type" : "timestamp",
+                    "on_update" : "now()",
+                    "default" : null,
+                    "null" : true
+                }
+            }
+        },
+
+        "query" : {
+            "mysql" : {
+                "alter" : {
+                    "type" : "ALTER TABLE $table MODIFY COLUMN $field $type $unsigned $null $default;"
+                }
+            }
+        }
+    }
+}

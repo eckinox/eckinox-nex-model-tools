@@ -1,0 +1,21 @@
+{
+    "success" : {
+        "create" : "La sauvegarde s'est déroulé avec succès !",
+        "edit" : "Les données ont été modifiés avec succès !"
+    },
+
+    "errors" : {
+        "alphabetic" : {
+            "invalid" : "Le champs « <b>{$field.name}</b> » contient des caractères invalides. Seulement les lettres et tirets sont acceptés par celui-ci."
+        },
+
+        "email" : {
+            "invalid" : "Le champs « <b>{$field.name}</b> » ne semble pas être une adresse courriel valide."
+        },
+
+        "password" : {
+            "mismatch" : "Le champs « <b>{$field.name}</b> » est différent du champs de confirmation. Veuillez réessayer de nouveau.",
+            "invalid" : "Les paramètres du champs « <b>{$field.name}</b> » sont erronées. Assurez-vous d'avoir entré au moins 5 caractères."
+        }
+    }
+}

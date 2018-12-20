@@ -1,0 +1,35 @@
+{% extends "/layout/default" %}
+
+{{ use Eckinox\Nex\form; }}
+
+{% section "header" %}
+    <h1><i class="far fa-database" aria-hidden="true"></i>Migrations</h1>
+{% endsection %}
+
+{% section "subheader" %}
+    RUN MIGRATION CODE [ ?? ]
+{% endsection %}
+
+{% section "content" %}
+    {% form method="post" class="section" %}
+        <article class="create message is-dark">
+            <div class="message-body">
+                <h2 class="is-size-4 has-text-grey"></h2>
+
+                {% if $migrate ?? false %}
+                    <div>{{ $migrate->migrate(); }}</div>
+                {% else %}
+                    <div class="create">
+                        <button class="button" type="submit">
+                            Proceed
+                        </button>
+                    </div>
+                {% endforeach %}
+            </div>
+        </article>
+    {% endform %}
+
+    <div class="is-grouped">
+        <a href="{{= $this->url('!/migrate/create') }}" class="button is-info" type="submit">Next</a>
+    </div>
+{% endsection %}

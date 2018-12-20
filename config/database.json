@@ -1,0 +1,10 @@
+{
+    "Nex" : {
+        "database" : {
+            "information_schema" : {
+                "prefix" : "",
+                "name" : "information_schema"
+            }
+        }
+    }
+}

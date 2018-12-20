@@ -1,0 +1,79 @@
+{% extends "/layout/default" %}
+
+{{ use Eckinox\Nex\form; }}
+
+{% section "header" %}
+    <h1><i class="far fa-database" aria-hidden="true"></i>Migrations - ALTER TABLE [ {{= count($alter ?? []); }} ]</h1>
+{% endsection %}
+
+{% section "content" %}
+    {# dump $alter #}
+
+    {% form method="post" class="section" %}
+        <article class="alter message">
+            <div class="message-body">
+                {% if $alter %}
+                    {% foreach $alter as $table => $item %}
+                        <div class="alter-item">
+                            <label class="item checkbox tablename">{{= form::checkbox('alter[]', $table, true)}} <span>{{= $table }}</span></label>
+                            <ul class="alter-message-group">
+                                {% foreach $item as $field => $changes %}
+                                    <li class="alter-field">
+                                        <strong>{{= $field }}</strong>
+
+                                        <div class="changelist">
+                                            {% if is_string($changes) %}
+                                                <div class="alter-message">{{= $changes }}</div>
+                                            {% endif %}
+
+                                            {% if $changes['new_msg'] ?? false %}
+                                                <div class="alter-message">{{= $changes['new_msg'] }}</div>
+                                            {% endif %}
+
+                                            {% if $changes['type_info'] ?? false %}
+                                                <div class="alter-message">{{= $changes['type_info'] }}</div>
+                                            {% endif %}
+
+                                            {% if $changes['null_msg'] ?? false %}
+                                                <div class="alter-message">{{= $changes['null_msg'] }}</div>
+                                            {% endif %}
+
+                                            {% if $changes['default_msg'] ?? false %}
+                                                <div class="alter-message">{{= $changes['default_msg'] }}</div>
+                                            {% endif %}
+
+                                            {% if $changes['attr_added'] ?? false %}
+                                                <div class="alter-message">{{= $changes['attr_added'] }}</div>
+                                            {% endif %}
+                                        </div>
+                                    </li>
+                                {% endforeach %}
+                            </ul>
+                        </div>
+                    {% endforeach %}
+
+                    <button class="button is-danger" type="submit">
+                        Proceed
+                    </button>
+                {% else %}
+                    <div class="has-text-grey-light">No table to alter</div>
+                {% endif %}
+            </div>
+        </article>
+    {% endform %}
+
+    <div class="is-grouped">
+        <a href="{{= $this->url('!/migrate/create') }}" class="button is-info" type="submit">Previous</a>
+        <a href="{{= $this->url('!/migrate/relation') }}" class="button is-info" type="submit">Next</a>
+    </div>
+{% endsection %}
+
+{% section "css" %}
+    .alter-item {margin-bottom:30px}
+    .alter-field {padding:10px 5px 0 5px;}
+    .alter-field strong {text-transform:uppercase;}
+    .alter-message-group {padding-left:20px}
+    .alter-message {padding-left:25px;}
+    .alter-message:before {content:"- ";}
+    .table-name.checkbox {text-transform:uppercase;background: #838383;color: #fff;padding: 7px 5px;margin-top: 10px;}
+{% endsection %}
