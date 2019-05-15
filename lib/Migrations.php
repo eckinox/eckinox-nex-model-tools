@@ -34,8 +34,8 @@ class Migrations {
             }
 
             $fields = [];
-
             foreach($columns as $item) {
+                #dump($item["COLUMN_DEFAULT"]);
                 $fields[ strtolower($item['COLUMN_NAME']) ] = [
                     "type" => strtolower($item['DATA_TYPE']),
                     "null" => $item['IS_NULLABLE'] === 'YES',
@@ -149,8 +149,8 @@ class Migrations {
             return false;
         }
 
-        $engine = $def['table']['engine'] ?? $this->config('nex_model_tools.table.engine');
-        $charset = $def['table']['charset'] ?? $this->config('nex_model_tools.table.charset');
+        $engine = $def['table']['engine'] ?? $this->config('Nex_model_tools.table.engine');
+        $charset = $def['table']['charset'] ?? $this->config('Nex_model_tools.table.charset');
 
         $pk = $fieldlist = [];
 
@@ -187,12 +187,17 @@ class Migrations {
             $sql = false;
             $opt = $pk = [];
 
+            // Adding a new column
             if ( empty($fields[$key]) ) {
                 $opt = [
                     'position' => $last_field
                 ];
 
-                $sql = $alter->add_column($this->_generate_field($key, $item), $opt);
+                $sql = $alter->add_column($this->_generate_field($key, $item, $pk), $opt);
+
+                if ( $pk ) {
+                    $sql .= ", ADD PRIMARY KEY (`$key`)";
+                }
             }
             else {
                 $new_def = [];
@@ -202,10 +207,10 @@ class Migrations {
                 }
 
                 if ( ( $fields[$key]['null'] ?? false ) !== $item['null'] ) {
-                    $new_def['null'] =  $item['null'];
+                    $new_def['null'] = $item['null'];
                 }
 
-                $default = trim( $item['default'] ?? "" , "'\"");
+                $default = array_key_exists('default', $item) ? ( is_string($item['default']) ? trim($item['default'], "'\"") : $item['default'] ) : "";
 
                 if ( ( $fields[$key]['default'] ?? "" ) !== $default ) {
                     $new_def['default'] = $default;
@@ -277,12 +282,11 @@ class Migrations {
             if ( is_null($def['default']) ) {
                 $def['default'] = "NULL";
             }
-
-            $sql[] = "default " . $def['default'];
+            $sql[] = "DEFAULT " . $def['default'];
         }
 
         if ( $def['on_update'] ?? false ) {
-            $sql[] = "on update " . $def['on_update'];
+            $sql[] = "ON UPDATE " . $def['on_update'];
         }
 
         return implode(" ", array_filter($sql));
@@ -306,7 +310,7 @@ class Migrations {
 
         foreach($list as $item) {
             if ( $table === $item['class']['table']['name'] ?? false ) {
-                $fields = $item['class']['fields'] ?? "";
+                $fields = $item['class']['field'] ?? "";
                 break;
             }
         }

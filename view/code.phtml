@@ -17,14 +17,14 @@
                 <h2 class="is-size-4 has-text-grey"></h2>
 
                 {% if $migrate ?? false %}
-                    <div>{{ $migrate->migrate(); }}</div>
-                {% else %}
-                    <div class="create">
-                        <button class="button" type="submit">
-                            Proceed
-                        </button>
-                    </div>
-                {% endforeach %}
+                    {{ $migrate->migrate(); }}
+                {% endif %}
+
+                <div class="create">
+                    <button class="button" type="submit">
+                        Proceed
+                    </button>
+                </div>
             </div>
         </article>
     {% endform %}

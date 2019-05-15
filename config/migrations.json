@@ -1,5 +1,5 @@
 {
-    "nex_model_tools" : {
+    "Nex_model_tools" : {
         "table" : {
             "engine" : "MyISAM",
             "charset" : "utf8mb4",
@@ -67,6 +67,11 @@
                     "size" : 1
                 },
 
+                "nullable bool" : {
+                    "type" : "bool",
+                    "null" : true
+                },
+
                 "foreign key" : {
                     "type" : "int",
                     "null" : true,
@@ -76,6 +81,22 @@
                 "string" : {
                     "type" : "varchar",
                     "size" : 255
+                },
+
+                "nullable string" : {
+                    "type" : "varchar",
+                    "size" : 255,
+                    "null" : true
+                },
+
+                "nullable text" : {
+                    "type" : "text",
+                    "null" : true
+                },
+
+                "array" : {
+                    "type" : "medium text",
+                    "null" : true
                 },
 
                 "small currency" : {
@@ -94,6 +115,16 @@
                     "type" : "decimal",
                     "size" : "19,2",
                     "default" : "0.00"
+                },
+
+                "nullable date" : {
+                    "type" : "date",
+                    "null" : true
+                },
+
+                "nullable datetime" : {
+                    "type" : "datetime",
+                    "null" : true
                 },
 
                 "created at" : {

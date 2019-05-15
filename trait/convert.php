@@ -35,6 +35,10 @@ trait convert {
         return is_numeric($value) ? (int) $value : 0;
     }
 
+    protected function _convert_tinyint($field, $value) {
+        return is_numeric($value) ? (int) $value : 0;
+    }
+
     protected function _convert_float($field, $value) {
         return is_numeric($value) ? (float) $value : 0;
     }
@@ -53,5 +57,9 @@ trait convert {
 
     protected function _convert_datetime($field, $value) {
         return ( $ts = date::dateToTimestamp($value) ) ? date::date(Configuration::get('nex_model_tools.converter.format.datetime'), $ts) : null;
+    }
+
+    protected function _convert_json($field, $value) {
+        return json_encode($value);
     }
 }

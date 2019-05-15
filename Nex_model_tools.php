@@ -19,18 +19,26 @@ class Nex_model_tools extends Component {
             $obj = $e->caller();
 
             # Prefill table name if it's not defined
-            if ( empty($obj->tablename) &&
-                ( $annotation = Annotation::instance()->get_from_object($obj) ) &&
-                ( $annotation['class']['table'] ?? false ) ) {
+            if ( empty($obj->tablename) ) {
+                $annotation = Annotation::instance()->get_from_object($obj);
 
-                foreach($annotation['class']['relation'] ?? [] as $field => $rel) {
-                    $obj::$$field = $rel;
+                if ( $annotation['class']['table'] ?? false ) {
+
+                    foreach($annotation['class']['relation'] ?? [] as $field => $rel) {
+                        $obj::$$field = $rel;
+                    }
+
+                    $obj->set_table_name( $annotation['class']['table']['name'] );
                 }
-
-                $obj->set_table_name( $annotation['class']['table']['name'] );
             }
 
+            $ref = $obj->reflection();
 
+            foreach($ref['traits'] as $class => $name) {
+                if ( in_array( $method = "__construct_$name", $ref['methods']) ) {
+                    $obj->$method();
+                }
+            }
         });
     }
 }

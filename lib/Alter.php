@@ -37,7 +37,7 @@ class Alter {
             "ADD COLUMN $field_definition ",
             $options['position'] ? "AFTER `{$options['position']}`" : 'FIRST',
         ]);
-
+        
         return $this->build();
     }
 

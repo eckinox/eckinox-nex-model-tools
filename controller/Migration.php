@@ -75,11 +75,15 @@ class Migration extends Basic_controller {
         if ( $this->form_sent() ) {
             foreach(array_filter((array) $this->post('alter')) as $item) {
                 $this->_migrations()->table_alter($item, true);
-                #if ($res) dump($res);
             }
         }
 
         $alter = $this->_migrations()->alterable_tables(null);
+
+        if ( $table = $this->get('table') ) {
+            $alter = array_intersect_key($alter, array_flip((array) $table));
+        }
+
         return $this->render('/alter', get_defined_vars());
     }
 

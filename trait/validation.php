@@ -67,15 +67,15 @@ trait validation {
     }
 
     protected function _validation_def() {
-        return Annotation::instance()->annotations()[get_class()]['class']['validation'] ?? trigger_error("@validation annotation was not found within «".get_class()."» object", \E_USER_ERROR);
+        return Annotation::instance()->annotations()[static::class]['class']['validation'] ?? trigger_error("'@validation' annotation was not found within «".static::class."» object", \E_USER_ERROR);
     }
 
     protected function _fieldlist() {
-        return Annotation::instance()->annotations()[get_class()]['class']['field'] ?? trigger_error("@fields annotation was not found within «".get_class()."» object", \E_USER_ERROR);
+        return Annotation::instance()->annotations()[static::class]['class']['field'] ?? trigger_error("'@field' annotation was not found within «".static::class."» object", \E_USER_ERROR);
     }
 
     protected function _relationlist() {
-        return Annotation::instance()->annotations()[get_class()]['class']['relation'] ?? trigger_error("@fields annotation was not found within «".get_class()."» object", \E_USER_ERROR);
+        return Annotation::instance()->annotations()[static::class]['class']['relation'] ?? trigger_error("'@relation' annotation was not found within «".static::class."» object", \E_USER_ERROR);
     }
 
     protected function _validate_password($value, $param) {

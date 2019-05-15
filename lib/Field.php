@@ -20,9 +20,9 @@ class Field {
     protected $definition = [];
 
     protected function __construct() {
-        $this->type = $this->config('nex.database._default.type');
-        $this->fields = $this->config("nex_model_tools.fields");
-        $this->definition = $this->config("nex_model_tools.definition");
+        $this->type = $this->config('Nex.database._default.type');
+        $this->fields = $this->config("Nex_model_tools.fields");
+        $this->definition = $this->config("Nex_model_tools.definition");
     }
 
     public function get_field($field_definition, $skip_default_definition = false) {
@@ -32,7 +32,7 @@ class Field {
         elseif ( $this->fields[$this->type][ $field_definition['type'] ] ?? false ) {
             $found_field = $this->get_field( $this->fields[$this->type][$field_definition['type']], true );
         }
-
+        
         return array_replace_recursive($skip_default_definition ? [] : ( $this->definition ?? [] ), $found_field ?? [], $field_definition, [ 'type' => ($found_field ?? $field_definition)['type'] ]);
     }
 
